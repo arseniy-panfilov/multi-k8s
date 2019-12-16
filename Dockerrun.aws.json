@@ -3,7 +3,32 @@
   "containerDefinitions": [
     {
       "name": "client",
-      "image": "arseniypanfilov/multi-client"
+      "image": "arseniypanfilov/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "arseniypanfilov/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "arseniypanfilov/multi-worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "arseniypanfilov/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
     }
   ]
 }
